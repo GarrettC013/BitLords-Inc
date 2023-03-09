@@ -1,26 +1,37 @@
-import sys
- 
-from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QWidget,QStackedWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow
+import sys
 
 
-
-
-class Window(QDialog):
+class MyWindow(QMainWindow):
     def __init__(self):
-        super(Window, self).__init__()
-        loadUi("window.ui",self)
+        super(MyWindow,self).__init__()
+        self.initUI()
 
-app= QApplication(sys.argv)
-window = Window()
-widget = QStackedWidget()
+    def button_clicked(self):
+        self.label.setText("you pressed the button")
+        self.update()
 
-widget.addWidget(window)
-widget.setFixedHeight(800)
-widget.setFixedWidth(1200)
-widget.show()
-try:
-    sys.exit(app.exec())
-except:
-    print("Exiting")
+    def initUI(self):
+        self.setGeometry(200, 200, 300, 300)
+        self.setWindowTitle("Tech With Tim")
+
+        self.label = QtWidgets.QLabel(self)
+        self.label.setText("my first label!")
+        self.label.move(50,50)
+
+        self.b1 = QtWidgets.QPushButton(self)
+        self.b1.setText("click me!")
+        self.b1.clicked.connect(self.button_clicked)
+
+    def update(self):
+        self.label.adjustSize()
+
+
+def window():
+    app = QApplication(sys.argv)
+    win = MyWindow()
+    win.show()
+    sys.exit(app.exec_())
+
+window()
