@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ListApp_Window</class>
+ <widget class="QMainWindow" name="ListApp_Window">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QListWidget" name="Athlete_List">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>70</y>
+      <width>256</width>
+      <height>192</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Meal at 8:30 A.M.</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Morning Lift at 9:30 A.M.</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Have Lunch at 12:00 A.M. </string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Team Practice at 3:00 P.M.</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Recovery Session 5:00 P.M</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Dinner at 7:00 P.M.</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+   </widget>
+   <widget class="QListWidget" name="ToDo_List">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>300</y>
+      <width>256</width>
+      <height>192</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Task 1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Task 2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Task 3</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Task 4</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Task 5</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="addButton">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>40</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Add to List</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>40</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Delete from List</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkTask_1">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>70</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Task 1</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkTask_2">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>90</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Task 2</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkTask_3">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>110</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Task 3</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkTask_4">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>130</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Task 4</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkTask_5">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>150</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Task 5</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkTask_6">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>170</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Task 6</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
