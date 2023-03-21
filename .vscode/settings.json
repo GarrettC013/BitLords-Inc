@@ -1,14 +1,13 @@
 {
     "python.pythonPath": "C:\\Users\\Zachary Burgess\\anaconda3\\python.exe",
     "python.autoComplete.extraPaths": [
-        "C:\\Users\\garbe\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+        "C:\\Users\\garbe\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
         "C:\\Users\\garbe\\OneDrive\\Documents\\GitHub\\BitLords-Inc"
     ],
     "python.analysis.extraPaths": [
-        "C:\\Users\\garbe\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+        "C:\\Users\\garbe\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
         "C:\\Users\\garbe\\OneDrive\\Documents\\GitHub\\BitLords-Inc"
-    ],
-    "python.analysis.extraPaths": ["",""]
+    ]
     
 
 
