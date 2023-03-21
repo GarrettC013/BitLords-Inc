@@ -23,6 +23,7 @@ class Ui_MainWindow(object):
         self.add_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked= lambda: self.add_it())
         self.add_pushButton.setGeometry(QtCore.QRect(660, 490, 93, 28))
         self.add_pushButton.setObjectName("add_pushButton")
+        
 
         self.newTask_lineEdit = QtWidgets.QTextEdit(self.centralwidget)
         self.newTask_lineEdit.setGeometry(QtCore.QRect(470, 490, 171, 31))
