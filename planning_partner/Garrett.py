@@ -17,32 +17,50 @@ from PyQt5 import QtCore, QtGui
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(640, 550)
+        MainWindow.setMinimumSize(QtCore.QSize(640, 550))
+        MainWindow.setMaximumSize(QtCore.QSize(640, 550))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
-        self.add_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked= lambda: self.add_it())
-        self.add_pushButton.setGeometry(QtCore.QRect(660, 490, 93, 28))
-        self.add_pushButton.setObjectName("add_pushButton")
-        
+        self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
+        self.tabWidget.setGeometry(QtCore.QRect(0, -20, 640, 550))
+        self.tabWidget.setMinimumSize(QtCore.QSize(640, 550))
+        self.tabWidget.setMaximumSize(QtCore.QSize(640, 550))
+        self.tabWidget.setTabletTracking(False)
+        self.tabWidget.setAutoFillBackground(True)
+        self.tabWidget.setObjectName("tabWidget")
 
-        self.newTask_lineEdit = QtWidgets.QTextEdit(self.centralwidget)
-        self.newTask_lineEdit.setGeometry(QtCore.QRect(470, 490, 171, 31))
-        self.newTask_lineEdit.setObjectName("newTask_textEdit")
+        self.tabWidgetPage1 = QtWidgets.QWidget()
+        self.tabWidgetPage1.setObjectName("tabWidgetPage1")
 
-        self.myTasks_listWidget = QtWidgets.QListWidget(self.centralwidget)
-        self.myTasks_listWidget.setGeometry(QtCore.QRect(130, 70, 531, 331))
+        self.myTasks_listWidget = QtWidgets.QListWidget(self.tabWidgetPage1)
+        self.myTasks_listWidget.setGeometry(QtCore.QRect(70, 20, 531, 331))
         self.myTasks_listWidget.setObjectName("myTasks_listWidget")
-        
+
+        self.newTask_textEdit = QtWidgets.QTextEdit(self.tabWidgetPage1)
+        self.newTask_textEdit.setGeometry(QtCore.QRect(250, 430, 171, 31))
+        self.newTask_textEdit.setObjectName("newTask_textEdit")
+
+        self.add_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked= lambda: self.add_it())
+        self.add_pushButton.setGeometry(QtCore.QRect(470, 430, 93, 28))
+        self.add_pushButton.setObjectName("add_pushButton")
+
+        self.tabWidget.addTab(self.tabWidgetPage1, "")
+
+        self.tabWidgetPage2 = QtWidgets.QWidget()
+        self.tabWidgetPage2.setObjectName("tabWidgetPage2")
+
+        self.tabWidget.addTab(self.tabWidgetPage2, "")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
+        
         MainWindow.setStatusBar(self.statusbar)
-
         self.toolBar = QtWidgets.QToolBar(MainWindow)
         self.toolBar.setObjectName("toolBar")
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
-        
         self.toolBar.addSeparator()
 
         self.retranslateUi(MainWindow)
@@ -51,13 +69,13 @@ class Ui_MainWindow(object):
     #Adding Item to the List
     def add_it(self):
         #grab the task
-        item = self.newTask_lineEdit.toPlainText()
+        item = self.newTask_textEdit.toPlainText()
 
         #add to list
         self.myTasks_listWidget.addItem(item)
 
         #clear test
-        self.newTask_lineEdit.setText("")
+        self.newTask_textEdit.setText("")
 
 
     def retranslateUi(self, MainWindow):
@@ -66,6 +84,7 @@ class Ui_MainWindow(object):
         self.add_pushButton.setText(_translate("MainWindow", "Add Task"))
         self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar"))
 
+#self.centralwidget, clicked= lambda: self.add_it()
 
 if __name__ == "__main__":
     import sys

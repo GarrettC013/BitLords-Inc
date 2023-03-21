@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\garbe\OneDrive\Documents\GitHub\BitLords-Inc\ToDo_List.ui'
+# Form implementation generated from reading ui file 'ToDo_List.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -59,3 +59,13 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.add_pushButton.setText(_translate("MainWindow", "Add Task"))
         self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
