@@ -50,8 +50,14 @@ class Ui_Form(object):
         self.taskLineEdit.setStyleSheet("font:12pt;")
         self.taskLineEdit.setObjectName("taskLineEdit")
 
+<<<<<<< Updated upstream
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+=======
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+ 
+>>>>>>> Stashed changes
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
