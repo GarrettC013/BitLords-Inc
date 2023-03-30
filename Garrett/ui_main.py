@@ -19,6 +19,8 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(852, 514)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
         self.calendarWidget = QtWidgets.QCalendarWidget(MainWindow)
         self.calendarWidget.setGeometry(QtCore.QRect(40, 150, 411, 311))
         self.calendarWidget.setStyleSheet("font:12pt;")
