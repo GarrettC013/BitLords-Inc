@@ -10,7 +10,7 @@ from PyQt5 import QtCore
 class Window(QWidget):
     def __init__(self):
         super(Window, self).__init__()
-        uic.loadUi(r"C:\Users\garbe\OneDrive\Documents\GitHub\BitLords-Inc\Garrett\main.ui'", self)
+        uic.loadUi(r"C:\Users\garbe\OneDrive\Documents\GitHub\BitLords-Inc\Garrett\main.ui", self)
 
 
 
