@@ -36,16 +36,16 @@ class Ui_MainWindow(object):
 "color:white;\n"
 "font:11pt;")
         self.saveButton.setObjectName("saveButton")
-        self.addButton = QtWidgets.QPushButton(self.centralwidget, clicked= lambda: self.add_it())
+        self.addButton = QtWidgets.QPushButton(MainWindow, clicked= lambda: self.add_it())
         self.addButton.setGeometry(QtCore.QRect(730, 110, 93, 28))
         self.addButton.setStyleSheet("border-radius:10px;\n"
 "background-color: #01BFFF;\n"
 "color:white;\n"
 "")
         self.addButton.setObjectName("addButton")
-        self.newTask_textEdit = QtWidgets.QTextEdit(self.tasksListWidget)
-        self.newTask_textEdit.setGeometry(QtCore.QRect(250, 430, 171, 31))
-        self.newTask_textEdit.setObjectName("newTask_textEdit")
+        # self.newTask_textEdit = QtWidgets.QTextEdit(self.tasksListWidget)
+        # self.newTask_textEdit.setGeometry(QtCore.QRect(250, 430, 171, 31))
+        # self.newTask_textEdit.setObjectName("newTask_textEdit")
         self.label = QtWidgets.QLabel(MainWindow)
         self.label.setGeometry(QtCore.QRect(0, 0, 851, 101))
         self.label.setStyleSheet("font-size : 24pt;\n"
@@ -60,16 +60,23 @@ class Ui_MainWindow(object):
         self.taskLineEdit.setObjectName("taskLineEdit")
 
         self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow) 
-    def add_it(self):
-        #grab the task
-        item = self.newTask_textEdit.toPlainText()
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        #add to list
+    def add_it(self):  
+        item = self.taskLineEdit.text()
+
         self.tasksListWidget.addItem(item)
 
-        #clear test
-        self.newTask_textEdit.setText("")    
+        self.taskLineEdit.setText("")  
+    # def add_it(self):
+    #     #grab the task
+    #     item = self.newTask_textEdit.toPlainText()
+
+    #     #add to list
+    #     self.tasksListWidget.addItem(item)
+
+    #     #clear test
+    #     self.newTask_textEdit.setText("")    
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
