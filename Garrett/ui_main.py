@@ -36,7 +36,7 @@ class Ui_MainWindow(object):
 "color:white;\n"
 "font:11pt;")
         self.saveButton.setObjectName("saveButton")
-        self.addButton = QtWidgets.QPushButton(Ui_MainWindow, clicked= lambda: self.add_it())
+        self.addButton = QtWidgets.QPushButton(self.centralwidget, clicked= lambda: self.add_it())
         self.addButton.setGeometry(QtCore.QRect(730, 110, 93, 28))
         self.addButton.setStyleSheet("border-radius:10px;\n"
 "background-color: #01BFFF;\n"
