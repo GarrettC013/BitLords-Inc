@@ -19,8 +19,8 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(852, 514)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
-        self.centralwidget.setObjectName("centralwidget")
+        #self.centralwidget = QtWidgets.QWidget(MainWindow)
+        #self.centralwidget.setObjectName("centralwidget")
         self.calendarWidget = QtWidgets.QCalendarWidget(MainWindow)
         self.calendarWidget.setGeometry(QtCore.QRect(40, 150, 411, 311))
         self.calendarWidget.setStyleSheet("font:12pt;")
@@ -36,7 +36,7 @@ class Ui_MainWindow(object):
 "color:white;\n"
 "font:11pt;")
         self.saveButton.setObjectName("saveButton")
-        self.addButton = QtWidgets.QPushButton(MainWindow)
+        self.addButton = QtWidgets.QPushButton(MainWindow, clicked= lambda: self.add_it())
         self.addButton.setGeometry(QtCore.QRect(730, 110, 93, 28))
         self.addButton.setStyleSheet("border-radius:10px;\n"
 "background-color: #01BFFF;\n"
@@ -58,6 +58,17 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def add_it(self):
+        #grab the task
+        item = self.label.text()
+
+        #add to list
+        self.tasksListWidget.addItem(item)
+
+        #clear test
+        self.label.setText("")
+ 
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
