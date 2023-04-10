@@ -1,11 +1,9 @@
 import sqlite3
-
+import sys
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QWidget, QApplication, QListWidgetItem, QMessageBox
-from PyQt5 import uic, QtGui
-import sys
-
-from PyQt5 import QtCore
+from PyQt5 import uic
+from PyQt5 import QtCore, QtGui
 
 class Window(QWidget):
     def __init__(self):
@@ -15,24 +13,20 @@ class Window(QWidget):
         self.calendarDateChanged()
         self.saveButton.clicked.connect(self.saveChanges)
         self.addButton.clicked.connect(self.addNewTask)
-        
-
 
     def calendarDateChanged(self):
-        print("The calendar date was changed.")
         dateSelected = self.calendarWidget.selectedDate().toPyDate()
-        print("Date selected:", dateSelected)
         self.updateTaskList(dateSelected)
 
     def updateTaskList(self, date):
         self.tasksListWidget.clear()
-
         db = sqlite3.connect('Garrett\data.db')
         cursor = db.cursor()
 
         query = "SELECT task, completed FROM tasks WHERE date = ?"
         row = (date,)
         results = cursor.execute(query, row).fetchall()
+
         for result in results:
             item = QListWidgetItem(str(result[0]))
             item.setFlags(item.flags() | QtCore.Qt.ItemIsUserCheckable)
@@ -41,6 +35,8 @@ class Window(QWidget):
             elif result[1] == "NO":
                 item.setCheckState(QtCore.Qt.Unchecked)
             self.tasksListWidget.addItem(item)
+
+        self.highlightDaysWithTasks()
 
     def saveChanges(self):
         db = sqlite3.connect("Garrett\data.db")
@@ -57,12 +53,6 @@ class Window(QWidget):
             row = (task, date,)
             cursor.execute(query, row)
         db.commit()
-
-        # Remove checked items from the list
-        for i in reversed(range(self.tasksListWidget.count())):
-            item = self.tasksListWidget.item(i)
-            if item.checkState() == QtCore.Qt.Checked:
-                self.tasksListWidget.takeItem(i)
 
         messageBox = QMessageBox()
         messageBox.setText("Changes saved.")
@@ -82,10 +72,9 @@ class Window(QWidget):
         db.commit()
         self.updateTaskList(date)
         self.taskLineEdit.clear()
-        self.highlightDaysWithTasks(date)
 
 def highlightDaysWithTasks():
-    db = sqlite3.connect("Garrett\data.db")
+    db = sqlite3.connect('Garrett\data.db')
     cursor = db.cursor()
     query = "SELECT DISTINCT date FROM tasks"
     results = cursor.execute(query).fetchall()
@@ -99,9 +88,3 @@ def highlightDaysWithTasks():
             fgBrush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
             fmt = QtGui.QTextCharFormat()
             fmt.setBackground
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = Window()
-    window.show()
-    sys.exit(app.exec())
