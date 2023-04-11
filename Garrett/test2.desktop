@@ -1,6 +1,11 @@
 [Desktop Entry]
 Type=Application
+<<<<<<< Updated upstream
 Name=MyApp
 Exec=python Garrett\test2.py
+=======
+Name=test2
+Exec=python C:\Users\garbe\OneDrive\Documents\GitHub\BitLords-Inc\Garrett\test2.py
+>>>>>>> Stashed changes
 Icon=C:\Users\garbe\OneDrive\Desktop\Junior Year 22-23\Spring Sem 23\CSI 460\app_icon.png
 Terminal=false
