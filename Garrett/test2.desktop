@@ -1,9 +1,5 @@
 [Desktop Entry]
 Type=Application
-<<<<<<< Updated upstream
-Name=MyApp
-Exec=python Garrett\test2.py
-=======
 Name=test2
 Exec=python C:\Users\garbe\OneDrive\Documents\GitHub\BitLords-Inc\Garrett\test2.py
 >>>>>>> Stashed changes
