@@ -7,15 +7,16 @@ import sys
 
 from PyQt5 import QtCore
 
-
 class Window(QWidget):
     def __init__(self):
         super(Window, self).__init__()
-        uic.loadUi(r"Garrett/main.ui", self)
+        uic.loadUi(r"Main/main.ui", self)
         self.calendarWidget.selectionChanged.connect(self.calendarDateChanged)
         self.calendarDateChanged()
         self.saveButton.clicked.connect(self.saveChanges)
         self.addButton.clicked.connect(self.addNewTask)
+        
+
 
     def calendarDateChanged(self):
         print("The calendar date was changed.")
@@ -26,7 +27,7 @@ class Window(QWidget):
     def updateTaskList(self, date):
         self.tasksListWidget.clear()
 
-        db = sqlite3.connect('Garrett/data.db')
+        db = sqlite3.connect('Main\data.db')
         cursor = db.cursor()
 
         query = "SELECT task, completed FROM tasks WHERE date = ?"
@@ -41,10 +42,8 @@ class Window(QWidget):
                 item.setCheckState(QtCore.Qt.Unchecked)
             self.tasksListWidget.addItem(item)
 
-        self.highlightDaysWithTasks()
-
     def saveChanges(self):
-        db = sqlite3.connect("Garrett/data.db")
+        db = sqlite3.connect('Main\data.db')
         cursor = db.cursor()
         date = self.calendarWidget.selectedDate().toPyDate()
 
@@ -70,10 +69,8 @@ class Window(QWidget):
         messageBox.setStandardButtons(QMessageBox.Ok)
         messageBox.exec()
 
-        self.highlightDaysWithTasks()
-
     def addNewTask(self):
-        db = sqlite3.connect("Garrett/data.db")
+        db = sqlite3.connect('Main\data.db')
         cursor = db.cursor()
 
         newTask = str(self.taskLineEdit.text())
@@ -85,37 +82,24 @@ class Window(QWidget):
         db.commit()
         self.updateTaskList(date)
         self.taskLineEdit.clear()
-        self.highlightDaysWithTasks()
+        #self.highlightDaysWithTasks(date)
+'''
+def highlightDaysWithTasks():
+    db = sqlite3.connect('Garrett\data.db')
+    cursor = db.cursor()
+    query = "SELECT DISTINCT date FROM tasks"
+    results = cursor.execute(query).fetchall()
 
-    def highlightDaysWithTasks(self):
-        db = sqlite3.connect("Garrett\data.db")
-        cursor = db.cursor()
-        query = "SELECT DISTINCT date FROM tasks"
-        results = cursor.execute(query).fetchall()
+    datesWithTasks = [QtCore.QDate(*x) for x in results]
 
-        datesWithTasks = [QtCore.QDate(*x) for x in results]
-
-        # get the current month and year of the calendar
-        currentMonth = self.calendarWidget.monthShown()
-        currentYear = self.calendarWidget.yearShown()
-
-        # iterate through the days in the current month
-        for day in range(1, 32):
-            try:
-                # create a date object for the current day
-                date = QtCore.QDate(currentYear, currentMonth, day)
-
-                # set the background color of the day if there are tasks on that day
-                if date in datesWithTasks:
-                    bgBrush = QtGui.QBrush(QtGui.QColor(0, 255, 0, 100))
-                    fmt = QtGui.QTextCharFormat()
-                    fmt.setBackground(bgBrush)
-                    self.calendarWidget.setDateTextFormat(date, fmt)
-
-            except ValueError:
-                # if the day is invalid for the current month, move on to the next day
-                continue
-
+    for date in datesWithTasks:
+        calDate = QtWidgets.QCalendarWidget().selectedDate()
+        if date == calDate:
+            bgBrush = QtGui.QBrush(QtGui.QColor(0, 255, 0, 100))
+            fgBrush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+            fmt = QtGui.QTextCharFormat()
+            fmt.setBackground
+'''
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = Window()
