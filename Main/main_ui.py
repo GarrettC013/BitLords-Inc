@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\garbe\OneDrive\Documents\GitHub\BitLords-Inc\Garrett\main.ui'
+# Form implementation generated from reading ui file 'c:\Users\garbe\OneDrive\Documents\GitHub\BitLords-Inc\Main\main.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #

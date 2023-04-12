@@ -10,7 +10,7 @@ from PyQt5 import QtCore
 class Window(QWidget):
     def __init__(self):
         super(Window, self).__init__()
-        uic.loadUi(r"Garrett/main.ui", self)
+        uic.loadUi(r"Main/main.ui", self)
         self.calendarWidget.selectionChanged.connect(self.calendarDateChanged)
         self.calendarDateChanged()
         self.saveButton.clicked.connect(self.saveChanges)
@@ -27,7 +27,7 @@ class Window(QWidget):
     def updateTaskList(self, date):
         self.tasksListWidget.clear()
 
-        db = sqlite3.connect('Garrett\data.db')
+        db = sqlite3.connect('Main\data.db')
         cursor = db.cursor()
 
         query = "SELECT task, completed FROM tasks WHERE date = ?"
@@ -43,7 +43,7 @@ class Window(QWidget):
             self.tasksListWidget.addItem(item)
 
     def saveChanges(self):
-        db = sqlite3.connect("Garrett\data.db")
+        db = sqlite3.connect('Main\data.db')
         cursor = db.cursor()
         date = self.calendarWidget.selectedDate().toPyDate()
 
@@ -70,7 +70,7 @@ class Window(QWidget):
         messageBox.exec()
 
     def addNewTask(self):
-        db = sqlite3.connect("Garrett\data.db")
+        db = sqlite3.connect('Main\data.db')
         cursor = db.cursor()
 
         newTask = str(self.taskLineEdit.text())
@@ -82,10 +82,10 @@ class Window(QWidget):
         db.commit()
         self.updateTaskList(date)
         self.taskLineEdit.clear()
-        self.highlightDaysWithTasks(date)
-
+        #self.highlightDaysWithTasks(date)
+'''
 def highlightDaysWithTasks():
-    db = sqlite3.connect("Garrett\data.db")
+    db = sqlite3.connect('Garrett\data.db')
     cursor = db.cursor()
     query = "SELECT DISTINCT date FROM tasks"
     results = cursor.execute(query).fetchall()
@@ -99,7 +99,7 @@ def highlightDaysWithTasks():
             fgBrush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
             fmt = QtGui.QTextCharFormat()
             fmt.setBackground
-
+'''
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = Window()
