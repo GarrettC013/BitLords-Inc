@@ -1,30 +1,11 @@
 import sqlite3
-
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QWidget, QApplication, QListWidgetItem, QMessageBox
-from PyQt5 import uic, QtGui
 import sys
 
-from PyQt5 import QtCore
+from PyQt5.QtWidgets import QWidget, QApplication, QListWidgetItem, QMessageBox
+from PyQt5 import uic, QtGui, QtWidgets, QtCore
 
-class Window(QWidget):
-    def __init__(self):
-        super(Window, self).__init__()
-        uic.loadUi(r"Main/main.ui", self)
-        self.calendarWidget.selectionChanged.connect(self.calendarDateChanged)
-        self.calendarDateChanged()
-        self.saveButton.clicked.connect(self.saveChanges)
-        self.addButton.clicked.connect(self.addNewTask)
-        
-
-
-    def calendarDateChanged(self):
-        print("The calendar date was changed.")
-        dateSelected = self.calendarWidget.selectedDate().toPyDate()
-        print("Date selected:", dateSelected)
-        self.updateTaskList(dateSelected)
-
-    def updateTaskList(self, date):
+def updateTaskList(self, date, time):
+    def inner():
         self.tasksListWidget.clear()
 
         db = sqlite3.connect('Main\data.db')
@@ -41,8 +22,11 @@ class Window(QWidget):
             elif result[1] == "NO":
                 item.setCheckState(QtCore.Qt.Unchecked)
             self.tasksListWidget.addItem(item)
+            pass
+    return inner
 
-    def saveChanges(self):
+def saveChanges(self):
+    def inner():
         db = sqlite3.connect('Main\data.db')
         cursor = db.cursor()
         date = self.calendarWidget.selectedDate().toPyDate()
@@ -68,40 +52,31 @@ class Window(QWidget):
         messageBox.setText("Changes saved.")
         messageBox.setStandardButtons(QMessageBox.Ok)
         messageBox.exec()
+        pass
+    return inner
 
-    def addNewTask(self):
+def addNewTask(self):
+    print(type(self))
+    def inner():
         db = sqlite3.connect('Main\data.db')
         cursor = db.cursor()
 
         newTask = str(self.taskLineEdit.text())
         date = self.calendarWidget.selectedDate().toPyDate()
+        time = str(self.taskLineEdit.text())
 
-        query = "INSERT INTO tasks(task, completed, date) VALUES (?,?,?)"
-        row = (newTask, "NO", date,)
+        cursor.execute("PRAGMA table_info(tasks)")
+        columns = cursor.fetchall()
+        if ('time', 'TEXT', 0, None, 0) not in columns:
+            cursor.execute("ALTER TABLE tasks ADD COLUMN time TEXT")
+
+
+        query = "INSERT INTO tasks(task, completed, date, time) VALUES (?,?,?,?)"
+        row = (newTask, "NO", date, time,)
         cursor.execute(query, row)
         db.commit()
-        self.updateTaskList(date)
+        updateTaskList(self, date, time)
         self.taskLineEdit.clear()
-        #self.highlightDaysWithTasks(date)
-'''
-def highlightDaysWithTasks():
-    db = sqlite3.connect('Garrett\data.db')
-    cursor = db.cursor()
-    query = "SELECT DISTINCT date FROM tasks"
-    results = cursor.execute(query).fetchall()
-
-    datesWithTasks = [QtCore.QDate(*x) for x in results]
-
-    for date in datesWithTasks:
-        calDate = QtWidgets.QCalendarWidget().selectedDate()
-        if date == calDate:
-            bgBrush = QtGui.QBrush(QtGui.QColor(0, 255, 0, 100))
-            fgBrush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-            fmt = QtGui.QTextCharFormat()
-            fmt.setBackground
-'''
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = Window()
-    window.show()
-    sys.exit(app.exec())
+        self.taskLineEdit.clear()
+        pass
+    return inner
