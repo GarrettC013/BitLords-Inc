@@ -83,6 +83,8 @@ class Window(QWidget):
         self.updateTaskList(date)
         self.taskLineEdit.clear()
         #self.highlightDaysWithTasks(date)
+    
+    
 '''
 def highlightDaysWithTasks():
     db = sqlite3.connect('Garrett\data.db')
