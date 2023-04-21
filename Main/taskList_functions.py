@@ -4,7 +4,7 @@ import sys
 from PyQt5.QtWidgets import QWidget, QApplication, QListWidgetItem, QMessageBox
 from PyQt5 import uic, QtGui, QtWidgets, QtCore
 
-def updateTaskList(self, date, time):
+def updateTaskList(self, date): #, time
     def inner():
         self.tasksListWidget.clear()
 
@@ -63,20 +63,20 @@ def addNewTask(self):
 
         newTask = str(self.taskLineEdit.text())
         date = self.calendarWidget.selectedDate().toPyDate()
-        time = str(self.taskLineEdit.text())
-
+        #time = str(self.taskLineEdit.text())
+        '''
         cursor.execute("PRAGMA table_info(tasks)")
         columns = cursor.fetchall()
         if ('time', 'TEXT', 0, None, 0) not in columns:
             cursor.execute("ALTER TABLE tasks ADD COLUMN time TEXT")
+        '''
 
-
-        query = "INSERT INTO tasks(task, completed, date, time) VALUES (?,?,?,?)"
-        row = (newTask, "NO", date, time,)
+        query = "INSERT INTO tasks(task, completed, date) VALUES (?,?,?)" #, time ,?
+        row = (newTask, "NO", date,) #, time,
         cursor.execute(query, row)
         db.commit()
-        updateTaskList(self, date, time)
+        updateTaskList(self, date) #, time
         self.taskLineEdit.clear()
-        self.taskLineEdit.clear()
+        #self.taskLineEdit.clear()
         pass
     return inner

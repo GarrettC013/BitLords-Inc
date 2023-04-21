@@ -1,6 +1,6 @@
 import sqlite3
 import sys
-import datetime
+#import datetime
 
 from taskList_functions import updateTaskList
 
@@ -11,8 +11,8 @@ def calendarDateChanged(self):
         def inner():
                 print("The calendar date was changed.")
                 dateSelected = self.calendarWidget.selectedDate().toPyDate()
-                timeNow = datetime.datetime.now().strftime('%H:%M:%S')
+                #timeNow = datetime.datetime.now().strftime('%H:%M:%S')
                 print("Date selected:", dateSelected)
-                updateTaskList(self,dateSelected, timeNow)
+                updateTaskList(self,dateSelected) #, timeNow
                 pass
         return inner
