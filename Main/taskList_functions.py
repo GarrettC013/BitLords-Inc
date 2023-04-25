@@ -4,7 +4,7 @@ import sys
 from PyQt5.QtWidgets import QWidget, QApplication, QListWidgetItem, QMessageBox
 from PyQt5 import uic, QtGui, QtWidgets, QtCore
 
-def updateTaskList(self, date): #, time
+def updateTaskList(self, date):
     def inner():
         self.tasksListWidget.clear()
 
