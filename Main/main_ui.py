@@ -49,6 +49,9 @@ class Ui_Form(object):
         self.taskLineEdit.setGeometry(QtCore.QRect(500, 110, 241, 31))
         self.taskLineEdit.setStyleSheet("font:12pt;")
         self.taskLineEdit.setObjectName("taskLineEdit")
+        self.tourButton = QtWidgets.QPushButton(Form)
+        self.tourButton.setGeometry(QtCore.QRect(20, 110, 75, 23))
+        self.tourButton.setObjectName("tourButton")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -59,3 +62,4 @@ class Ui_Form(object):
         self.saveButton.setText(_translate("Form", "Save Changes"))
         self.addButton.setText(_translate("Form", "Add new"))
         self.label.setText(_translate("Form", "Daily Task Planner"))
+        self.tourButton.setText(_translate("Form", "Tour Button"))
