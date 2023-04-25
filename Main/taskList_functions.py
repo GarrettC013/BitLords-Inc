@@ -22,7 +22,7 @@ def updateTaskList(self, date): #, time
             elif result[1] == "NO":
                 item.setCheckState(QtCore.Qt.Unchecked)
             self.tasksListWidget.addItem(item)
-            pass
+    inner()
     return inner
 
 def saveChanges(self):
@@ -40,7 +40,7 @@ def saveChanges(self):
                 query = "UPDATE tasks SET completed = 'NO' WHERE task = ? AND date = ?"
             row = (task, date,)
             cursor.execute(query, row)
-        db.commit()
+            db.commit()
 
         # Remove checked items from the list
         for i in reversed(range(self.tasksListWidget.count())):
@@ -62,21 +62,19 @@ def addNewTask(self):
         cursor = db.cursor()
 
         newTask = str(self.taskLineEdit.text())
+        
+        if newTask.isspace == True:
+            messageBox = QMessageBox()
+            messageBox.setText("No Task Entered")
+            messageBox.setStandardButtons(QMessageBox.Ok)
+            messageBox.exec()   
         date = self.calendarWidget.selectedDate().toPyDate()
-        #time = str(self.taskLineEdit.text())
-        '''
-        cursor.execute("PRAGMA table_info(tasks)")
-        columns = cursor.fetchall()
-        if ('time', 'TEXT', 0, None, 0) not in columns:
-            cursor.execute("ALTER TABLE tasks ADD COLUMN time TEXT")
-        '''
 
-        query = "INSERT INTO tasks(task, completed, date) VALUES (?,?,?)" #, time ,?
-        row = (newTask, "NO", date,) #, time,
+        query = "INSERT INTO tasks(task, completed, date) VALUES (?,?,?)" 
+        row = (newTask, "NO", date,)
         cursor.execute(query, row)
         db.commit()
-        updateTaskList(self, date) #, time
+        updateTaskList(newTask, date) 
         self.taskLineEdit.clear()
-        #self.taskLineEdit.clear()
-        pass
+
     return inner
