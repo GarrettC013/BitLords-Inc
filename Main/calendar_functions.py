@@ -11,8 +11,7 @@ def calendarDateChanged(self):
         def inner():
                 print("The calendar date was changed.")
                 dateSelected = self.calendarWidget.selectedDate().toPyDate()
-                #timeNow = datetime.datetime.now().strftime('%H:%M:%S')
                 print("Date selected:", dateSelected)
-                updateTaskList(self,dateSelected) #, timeNow
+                updateTaskList(self,dateSelected)
                 pass
         return inner
