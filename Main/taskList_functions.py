@@ -39,6 +39,7 @@ def saveChanges(self):
             else:
                 query = "UPDATE tasks SET completed = 'NO' WHERE task = ? AND date = ?"
             row = (task, date,)
+            print("Query:", query, "Row:", row)
             cursor.execute(query, row)
             db.commit()
 
@@ -46,6 +47,11 @@ def saveChanges(self):
         for i in reversed(range(self.tasksListWidget.count())):
             item = self.tasksListWidget.item(i)
             if item.checkState() == QtCore.Qt.Checked:
+                task = item.text()
+                query = "DELETE FROM tasks WHERE task = ? AND date = ?"
+                row = (task, date,)
+                cursor.execute(query, row)
+                db.commit()
                 self.tasksListWidget.takeItem(i)
 
         messageBox = QMessageBox()
@@ -74,7 +80,7 @@ def addNewTask(self):
         row = (newTask, "NO", date,)
         cursor.execute(query, row)
         db.commit()
-        updateTaskList(newTask, date) 
+        updateTaskList(self, date) 
         self.taskLineEdit.clear()
 
     return inner
