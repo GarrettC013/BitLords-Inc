@@ -4,7 +4,7 @@ import sys
 from PyQt5.QtWidgets import QWidget, QApplication, QListWidgetItem, QMessageBox
 from PyQt5 import uic, QtGui, QtWidgets, QtCore
 
-def updateTaskList(self, date): #, time
+def updateTaskList(self, date):
     def inner():
         self.tasksListWidget.clear()
 
@@ -47,6 +47,11 @@ def saveChanges(self):
         for i in reversed(range(self.tasksListWidget.count())):
             item = self.tasksListWidget.item(i)
             if item.checkState() == QtCore.Qt.Checked:
+                task = item.text()
+                query = "DELETE FROM tasks WHERE task = ? AND date = ?"
+                row = (task, date,)
+                cursor.execute(query, row)
+                db.commit()
                 self.tasksListWidget.takeItem(i)
 
         messageBox = QMessageBox()
