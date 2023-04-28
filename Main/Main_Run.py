@@ -1,6 +1,6 @@
 import sqlite3
 import sys
-from calendar_functions import calendarDateChanged
+from calendar_functions import calendarDateChanged, highlightDatesWithTask
 from taskList_functions import saveChanges, addNewTask
 from tour_functions import guidedTour
 from PyQt5 import QtWidgets
@@ -17,6 +17,7 @@ class Window(QWidget):
         self.saveButton.clicked.connect(saveChanges(self))
         self.addButton.clicked.connect(addNewTask(self))
         self.tourButton.clicked.connect(guidedTour(self))
+        highlightDatesWithTask(self)
 
 
 if __name__ == "__main__":

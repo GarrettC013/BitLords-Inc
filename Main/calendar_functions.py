@@ -19,5 +19,18 @@ def calendarDateChanged(self):
                 pass
         return inner
 
-#def highlightDatesWithTasks(self):
-        
+def highlightDatesWithTask(self):
+    self.calendarWidget.setDateTextFormat(QtCore.QDate(), QtGui.QTextCharFormat())
+    self.calendarWidget.setDateTextFormat(QtCore.QDate(), QtGui.QTextCharFormat())
+    # retrieve all the dates that have tasks in the database
+    conn = sqlite3.connect('Main\data.db')
+    c = conn.cursor()
+    c.execute("SELECT DISTINCT date FROM tasks")
+    rows = c.fetchall()
+    dates = [QtCore.QDate.fromString(str(row[0]), "yyyy-MM-dd") for row in rows]
+    # highlight the dates in the calendar
+    for date in dates:
+        fmt = QtGui.QTextCharFormat()
+        fmt.setBackground(QtGui.QBrush(QtGui.QColor("#FF8C00")))
+        self.calendarWidget.setDateTextFormat(date, fmt)
+    conn.close()
