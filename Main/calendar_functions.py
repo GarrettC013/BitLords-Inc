@@ -4,6 +4,9 @@ import sys
 
 from taskList_functions import updateTaskList
 
+from PyQt5.QtGui import QTextCharFormat, QColor
+from datetime import datetime
+
 from PyQt5.QtWidgets import QWidget, QApplication, QListWidgetItem, QMessageBox
 from PyQt5 import uic, QtGui, QtWidgets, QtCore
 
@@ -15,3 +18,6 @@ def calendarDateChanged(self):
                 updateTaskList(self,dateSelected)
                 pass
         return inner
+
+#def highlightDatesWithTasks(self):
+        
