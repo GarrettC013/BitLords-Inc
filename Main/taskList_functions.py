@@ -39,6 +39,7 @@ def saveChanges(self):
             else:
                 query = "UPDATE tasks SET completed = 'NO' WHERE task = ? AND date = ?"
             row = (task, date,)
+            print("Query:", query, "Row:", row)
             cursor.execute(query, row)
             db.commit()
 
@@ -74,7 +75,7 @@ def addNewTask(self):
         row = (newTask, "NO", date,)
         cursor.execute(query, row)
         db.commit()
-        updateTaskList(newTask, date) 
+        updateTaskList(self, date) 
         self.taskLineEdit.clear()
 
     return inner
