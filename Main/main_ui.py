@@ -16,22 +16,22 @@ class Ui_Form(object):
         Form.setObjectName("Form")
         Form.resize(852, 514)
         self.calendarWidget = QtWidgets.QCalendarWidget(Form)
-        self.calendarWidget.setGeometry(QtCore.QRect(40, 150, 411, 311))
+        self.calendarWidget.setGeometry(QtCore.QRect(10, 140, 481, 311))
         self.calendarWidget.setStyleSheet("font:12pt;")
         self.calendarWidget.setObjectName("calendarWidget")
         self.tasksListWidget = QtWidgets.QListWidget(Form)
-        self.tasksListWidget.setGeometry(QtCore.QRect(480, 150, 341, 301))
+        self.tasksListWidget.setGeometry(QtCore.QRect(500, 150, 341, 301))
         self.tasksListWidget.setStyleSheet("font:12pt;")
         self.tasksListWidget.setObjectName("tasksListWidget")
         self.saveButton = QtWidgets.QPushButton(Form)
-        self.saveButton.setGeometry(QtCore.QRect(480, 460, 341, 28))
+        self.saveButton.setGeometry(QtCore.QRect(500, 460, 341, 28))
         self.saveButton.setStyleSheet("border-radius:10px;\n"
 "background-color: #01BFFF;\n"
 "color:white;\n"
 "font:11pt;")
         self.saveButton.setObjectName("saveButton")
         self.addButton = QtWidgets.QPushButton(Form)
-        self.addButton.setGeometry(QtCore.QRect(730, 110, 93, 28))
+        self.addButton.setGeometry(QtCore.QRect(750, 110, 93, 28))
         self.addButton.setStyleSheet("border-radius:10px;\n"
 "background-color: #01BFFF;\n"
 "color:white;\n"
@@ -46,9 +46,12 @@ class Ui_Form(object):
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.taskLineEdit = QtWidgets.QLineEdit(Form)
-        self.taskLineEdit.setGeometry(QtCore.QRect(480, 110, 241, 31))
+        self.taskLineEdit.setGeometry(QtCore.QRect(500, 110, 241, 31))
         self.taskLineEdit.setStyleSheet("font:12pt;")
         self.taskLineEdit.setObjectName("taskLineEdit")
+        self.tourButton = QtWidgets.QPushButton(Form)
+        self.tourButton.setGeometry(QtCore.QRect(20, 110, 75, 23))
+        self.tourButton.setObjectName("tourButton")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -59,3 +62,4 @@ class Ui_Form(object):
         self.saveButton.setText(_translate("Form", "Save Changes"))
         self.addButton.setText(_translate("Form", "Add new"))
         self.label.setText(_translate("Form", "Daily Task Planner"))
+        self.tourButton.setText(_translate("Form", "Tour Button"))

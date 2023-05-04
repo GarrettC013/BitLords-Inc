@@ -1,30 +1,11 @@
 import sqlite3
-
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QWidget, QApplication, QListWidgetItem, QMessageBox
-from PyQt5 import uic, QtGui
 import sys
 
-from PyQt5 import QtCore
+from PyQt5.QtWidgets import QWidget, QApplication, QListWidgetItem, QMessageBox
+from PyQt5 import uic, QtGui, QtWidgets, QtCore
 
-class Window(QWidget):
-    def __init__(self):
-        super(Window, self).__init__()
-        uic.loadUi(r"Main/main.ui", self)
-        self.calendarWidget.selectionChanged.connect(self.calendarDateChanged)
-        self.calendarDateChanged()
-        self.saveButton.clicked.connect(self.saveChanges)
-        self.addButton.clicked.connect(self.addNewTask)
-        
-
-
-    def calendarDateChanged(self):
-        print("The calendar date was changed.")
-        dateSelected = self.calendarWidget.selectedDate().toPyDate()
-        print("Date selected:", dateSelected)
-        self.updateTaskList(dateSelected)
-
-    def updateTaskList(self, date):
+def updateTaskList(self, date):
+    def inner():
         self.tasksListWidget.clear()
 
         db = sqlite3.connect('Main\data.db')
@@ -41,8 +22,11 @@ class Window(QWidget):
             elif result[1] == "NO":
                 item.setCheckState(QtCore.Qt.Unchecked)
             self.tasksListWidget.addItem(item)
+    inner()
+    return inner
 
-    def saveChanges(self):
+def saveChanges(self):
+    def inner():
         db = sqlite3.connect('Main\data.db')
         cursor = db.cursor()
         date = self.calendarWidget.selectedDate().toPyDate()
@@ -55,53 +39,48 @@ class Window(QWidget):
             else:
                 query = "UPDATE tasks SET completed = 'NO' WHERE task = ? AND date = ?"
             row = (task, date,)
+            print("Query:", query, "Row:", row)
             cursor.execute(query, row)
-        db.commit()
+            db.commit()
 
         # Remove checked items from the list
         for i in reversed(range(self.tasksListWidget.count())):
             item = self.tasksListWidget.item(i)
             if item.checkState() == QtCore.Qt.Checked:
+                task = item.text()
+                query = "DELETE FROM tasks WHERE task = ? AND date = ?"
+                row = (task, date,)
+                cursor.execute(query, row)
+                db.commit()
                 self.tasksListWidget.takeItem(i)
 
         messageBox = QMessageBox()
         messageBox.setText("Changes saved.")
         messageBox.setStandardButtons(QMessageBox.Ok)
         messageBox.exec()
+        pass
+    return inner
 
-    def addNewTask(self):
+def addNewTask(self):
+    print(type(self))
+    def inner():
         db = sqlite3.connect('Main\data.db')
         cursor = db.cursor()
 
         newTask = str(self.taskLineEdit.text())
+        
+        if newTask.isspace == True:
+            messageBox = QMessageBox()
+            messageBox.setText("No Task Entered")
+            messageBox.setStandardButtons(QMessageBox.Ok)
+            messageBox.exec()   
         date = self.calendarWidget.selectedDate().toPyDate()
 
-        query = "INSERT INTO tasks(task, completed, date) VALUES (?,?,?)"
+        query = "INSERT INTO tasks(task, completed, date) VALUES (?,?,?)" 
         row = (newTask, "NO", date,)
         cursor.execute(query, row)
         db.commit()
-        self.updateTaskList(date)
+        updateTaskList(self, date) 
         self.taskLineEdit.clear()
-        #self.highlightDaysWithTasks(date)
-'''
-def highlightDaysWithTasks():
-    db = sqlite3.connect('Garrett\data.db')
-    cursor = db.cursor()
-    query = "SELECT DISTINCT date FROM tasks"
-    results = cursor.execute(query).fetchall()
 
-    datesWithTasks = [QtCore.QDate(*x) for x in results]
-
-    for date in datesWithTasks:
-        calDate = QtWidgets.QCalendarWidget().selectedDate()
-        if date == calDate:
-            bgBrush = QtGui.QBrush(QtGui.QColor(0, 255, 0, 100))
-            fgBrush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-            fmt = QtGui.QTextCharFormat()
-            fmt.setBackground
-'''
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = Window()
-    window.show()
-    sys.exit(app.exec())
+    return inner
